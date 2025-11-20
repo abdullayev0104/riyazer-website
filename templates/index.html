@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="az" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riyazer - Riyaziyyat Platforması</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --danger-gradient: linear-gradient(135deg, #fd746c 0%, #ff9068 100%);
+        }
+        
+        .hero-section {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+        }
+        
+        .feature-card {
+            border: none;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            color: white;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .theme-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .btn-glow {
+            background: var(--success-gradient);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-glow:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+        }
+        
+        .student-dashboard {
+            display: none;
+        }
+        
+        .question-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stats-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Switch -->
+    <div class="theme-switch">
+        <button class="btn btn-outline-light btn-sm" onclick="toggleTheme()">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center" id="heroSection">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="display-3 fw-bold mb-4">Riyazer</h1>
+                    <p class="lead mb-5">Riyaziyyat biliklərini interaktiv şəkildə inkişaf etdirən innovativ platforma</p>
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <button class="btn btn-glow" onclick="showStudentLogin()">
+                            <i class="fas fa-graduation-cap me-2"></i>Şagird Kimi Başla
+                        </button>
+                        <button class="btn btn-outline-light" onclick="showAdminLogin()">
+                            <i class="fas fa-user-shield me-2"></i>Admin Girişi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5" id="featuresSection">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-5 fw-bold mb-3">Platforma Xüsusiyyətləri</h2>
+                    <p class="lead">Riyaziyyat öyrənməyi əyləncəli və effektiv edən güclü alətlər</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <h5>Gündəlik Suallar</h5>
+                        <p class="mb-0">Hər gün yeni riyaziyyat sualı ilə daimi inkişaf</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h5>Dərəcəli Testlər</h5>
+                        <p class="mb-0">Səviyyənizə uyğun asan, orta və çətin suallar</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-stopwatch"></i>
+                        </div>
+                        <h5>Vaxta Qarşı</h5>
+                        <p class="mb-0">Sürət və dəqiqliyinizi sınayan interaktiv testlər</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h5>Reyting Sistemi</h5>
+                        <p class="mb-0">Digər şagirdlərlə rəqabət edib özünüzü sınayın</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Login Modal -->
+    <div class="modal fade" id="studentLoginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Şagird Qeydiyyatı</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="studentRegistrationForm">
+                        <div class="mb-3">
+                            <label class="form-label">Ad və Soyad</label>
+                            <input type="text" class="form-control" id="fullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">İstifadəçi Adı</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-user-plus me-2"></i>Qeydiyyatdan Keç
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div class="modal fade" id="adminLoginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Admin Girişi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminLoginForm">
+                        <div class="mb-3">
+                            <label class="form-label">Admin Parolu</label>
+                            <input type="password" class="form-control" id="adminPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-sign-in-alt me-2"></i>Daxil Ol
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Dashboard -->
+    <div class="container mt-4 student-dashboard" id="studentDashboard">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h5 id="studentName">Şagird Paneli</h5>
+                    <div id="studentStats">
+                        <p><strong>Ümumi Bal:</strong> <span id="totalScore">0</span></p>
+                        <p><strong>Bu Ay:</strong> <span id="monthlyScore">0</span></p>
+                        <p><strong>Dəqiqlik:</strong> <span id="accuracy">0%</span></p>
+                    </div>
+                </div>
+                
+                <div class="list-group mt-3">
+                    <button class="list-group-item list-group-item-action" onclick="showDailyQuestions()">
+                        <i class="fas fa-calendar-day me-2"></i>Gündəlik Suallar
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="showGradedQuestions()">
+                        <i class="fas fa-chart-line me-2"></i>Dərəcəli Testlər
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="showStatistics()">
+                        <i class="fas fa-chart-bar me-2"></i>Statistika
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="showRating()">
+                        <i class="fas fa-trophy me-2"></i>Reyting
+                    </button>
+                    <button class="list-group-item list-group-item-action text-danger" onclick="logout()">
+                        <i class="fas fa-sign-out-alt me-2"></i>Çıxış
+                    </button>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+                <div id="contentArea">
+                    <div class="stats-card text-center">
+                        <i class="fas fa-home fa-3x text-muted mb-3"></i>
+                        <h4>Xoş gəlmisiniz!</h4>
+                        <p class="text-muted">Sol tərəfdən bir seçim edərək başlaya bilərsiniz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="container mt-4 student-dashboard" id="adminDashboard">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h5><i class="fas fa-user-shield me-2"></i>Admin Paneli</h5>
+                    <p>İdarəetmə alətlərinə giriş</p>
+                </div>
+                
+                <div class="list-group mt-3">
+                    <button class="list-group-item list-group-item-action" onclick="showAddQuestion()">
+                        <i class="fas fa-plus me-2"></i>Yeni Sual Əlavə Et
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="showManageQuestions()">
+                        <i class="fas fa-edit me-2"></i>Sualı İdarə Et
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="showScoreSystem()">
+                        <i class="fas fa-cog me-2"></i>Bal Sistemini Tənzimlə
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="showAdminRating()">
+                        <i class="fas fa-chart-bar me-2"></i>Reyting Cədvəli
+                    </button>
+                    <button class="list-group-item list-group-item-action text-danger" onclick="logout()">
+                        <i class="fas fa-sign-out-alt me-2"></i>Çıxış
+                    </button>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+                <div id="adminContentArea">
+                    <div class="stats-card text-center">
+                        <i class="fas fa-user-shield fa-3x text-muted mb-3"></i>
+                        <h4>Admin Paneline Xoş Gəlmisiniz!</h4>
+                        <p class="text-muted">Sol tərəfdən idarəetmə alətlərini seçin.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
